@@ -4,10 +4,11 @@ import { Box, ChakraProvider, Grid } from "@chakra-ui/react";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import theme from "./theme";
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div className="App">
         <Box>
           <Grid templateRows={"auto 1fr auto"} h={"100vh"}>

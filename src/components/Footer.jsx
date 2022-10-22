@@ -5,7 +5,7 @@ const Footer = () => {
     <Box sx={{ borderTop: "2px solid black", textAlign: "center", py: 3 }}>
       <Box>
         <Text>Made with 🥦 in Melbourne</Text>
-        <Text>© 2022 Brocolli & Co. All rights reserved.</Text>
+        <Text>© 2022 Broccoli & Co. All rights reserved.</Text>
       </Box>
     </Box>
   );

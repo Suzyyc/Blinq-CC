@@ -17,7 +17,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
         <ModalHeader textAlign={"center"}>All done!</ModalHeader>
         <ModalBody>
           <Text textAlign={"center"}>
-            You will be one of the first to experience Brocolli & Co. when we
+            You will be one of the first to experience Broccoli & Co. when we
             launch.
           </Text>
         </ModalBody>
