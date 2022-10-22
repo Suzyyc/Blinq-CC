@@ -1,4 +1,4 @@
-const { Text, Box } = require("@chakra-ui/react");
+import { Text, Box } from "@chakra-ui/react";
 
 const Header = () => {
   return (

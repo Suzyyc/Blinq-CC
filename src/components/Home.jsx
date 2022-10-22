@@ -1,6 +1,15 @@
-const { Container, Text, Heading, Button } = require("@chakra-ui/react");
+import {
+  Container,
+  Text,
+  Heading,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
+import FormModal from "./FormModal";
 
 const Home = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Container
       sx={{
@@ -16,7 +25,8 @@ const Home = () => {
         to enjoy every day.
       </Heading>
       <Text>Be the first to know when we launch</Text>
-      {/* <Button onClick={onOpen}>Request an invite</Button> */}
+      <Button onClick={onOpen}>Request an invite</Button>
+      <FormModal isOpen={isOpen} onClose={onClose} />
     </Container>
   );
 };
