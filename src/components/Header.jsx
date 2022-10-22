@@ -1,11 +1,11 @@
-const { Container, Text } = require("@chakra-ui/react")
+const { Text, Box } = require("@chakra-ui/react");
 
 const Header = () => {
-    return (
-        <Container>
-            <Text sx={{borderBottom: "2px solid black" }}>Brocolli & Co</Text>
-        </Container>
-    )
-}
+  return (
+    <Box>
+      <Text sx={{ borderBottom: "2px solid black" }}>Brocolli & Co</Text>
+    </Box>
+  );
+};
 
 export default Header;

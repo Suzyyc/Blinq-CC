@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { Box, ChakraProvider, Grid } from "@chakra-ui/react";
 
 import Home from "./components/Home";
 import Header from "./components/Header";
@@ -9,11 +9,13 @@ function App() {
   return (
     <ChakraProvider>
       <div className="App">
-        <Container>
-          <Header />
-          <Home />
-          <Footer />
-        </Container>
+        <Box>
+          <Grid templateRows={"auto 1fr auto"} h={"100vh"}>
+            <Header />
+            <Home />
+            <Footer />
+          </Grid>
+        </Box>
       </div>
     </ChakraProvider>
   );
