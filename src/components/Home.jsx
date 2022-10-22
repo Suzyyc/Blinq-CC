@@ -4,7 +4,6 @@ import {
   Heading,
   Button,
   useDisclosure,
-  Box,
   Image,
 } from "@chakra-ui/react";
 import FormModal from "./FormModal";
