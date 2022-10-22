@@ -4,6 +4,8 @@ import {
   Heading,
   Button,
   useDisclosure,
+  Box,
+  Image,
 } from "@chakra-ui/react";
 import FormModal from "./FormModal";
 import SuccessModal from "./SuccessModal";
@@ -28,8 +30,10 @@ const Home = () => {
         alignItems: "center",
         textAlign: "center",
         justifyContent: "center",
+        gap: "1rem",
       }}
     >
+      <Image sx={{ maxWidth: "200px" }} src="./cute-broccoli.jpeg" />
       <Heading>
         A better way <br></br>
         to enjoy every day.
