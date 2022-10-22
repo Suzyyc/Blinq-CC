@@ -23,7 +23,7 @@ import { useState } from "react";
 
 const formErrorsSchema = { confirmEmail: null };
 
-const FormModal = ({ isOpen, onClose }) => {
+const FormModal = ({ isOpen, onClose, successCB }) => {
   const [fields, setFields] = useState({
     name: "",
     email: "",
@@ -33,6 +33,8 @@ const FormModal = ({ isOpen, onClose }) => {
   const [formErrors, setFormErrors] = useState(formErrorsSchema);
 
   const [serverError, setServerError] = useState(null);
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     console.log(event);
@@ -48,9 +50,11 @@ const FormModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setFormErrors(formErrorsSchema);
     if (isSameEmail(fields.email, fields.confirmEmail)) {
       console.log(fields);
+      setLoading(true);
       const res = await fetch(
         "https://us-central1-blinkapp-684c1.cloudfunctions.net/fakeAuth",
         {
@@ -62,10 +66,13 @@ const FormModal = ({ isOpen, onClose }) => {
 
       if (res.ok) {
         console.log("okay");
+        onClose();
+        successCB();
       } else {
         const error = await res.json();
-        setServerError(error);
+        setServerError(error.errorMessage);
       }
+      setLoading(false);
     } else {
       setFormErrors({ confirmEmail: "Email does not match" });
     }
@@ -119,6 +126,8 @@ const FormModal = ({ isOpen, onClose }) => {
               sx={{ width: "100%", mt: 5 }}
               colorScheme="teal"
               type="submit"
+              isLoading={loading}
+              loadingText="Sending, please wait..."
             >
               Send
             </Button>

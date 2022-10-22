@@ -6,9 +6,19 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import FormModal from "./FormModal";
+import SuccessModal from "./SuccessModal";
 
 const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isSuccessOpen,
+    onClose: onSuccessClose,
+    onOpen: onSuccessOpen,
+  } = useDisclosure();
+
+  const handleSuccess = () => {
+    onSuccessOpen();
+  };
 
   return (
     <Container
@@ -26,7 +36,8 @@ const Home = () => {
       </Heading>
       <Text>Be the first to know when we launch</Text>
       <Button onClick={onOpen}>Request an invite</Button>
-      <FormModal isOpen={isOpen} onClose={onClose} />
+      <FormModal isOpen={isOpen} onClose={onClose} successCB={handleSuccess} />
+      <SuccessModal isOpen={isSuccessOpen} onClose={onSuccessClose} />
     </Container>
   );
 };
