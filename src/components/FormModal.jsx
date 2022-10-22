@@ -25,12 +25,14 @@ const formErrorsSchema = { confirmEmail: null };
 
 const FormModal = ({ isOpen, onClose }) => {
   const [fields, setFields] = useState({
-    fullName: "",
+    name: "",
     email: "",
     confirmEmail: "",
   });
 
   const [formErrors, setFormErrors] = useState(formErrorsSchema);
+
+  const [serverError, setServerError] = useState(null);
 
   const handleChange = (event) => {
     console.log(event);
@@ -49,6 +51,21 @@ const FormModal = ({ isOpen, onClose }) => {
     setFormErrors(formErrorsSchema);
     if (isSameEmail(fields.email, fields.confirmEmail)) {
       console.log(fields);
+      const res = await fetch(
+        "https://us-central1-blinkapp-684c1.cloudfunctions.net/fakeAuth",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: fields.email, name: fields.name }),
+        }
+      );
+
+      if (res.ok) {
+        console.log("okay");
+      } else {
+        const error = await res.json();
+        setServerError(error);
+      }
     } else {
       setFormErrors({ confirmEmail: "Email does not match" });
     }
@@ -69,10 +86,11 @@ const FormModal = ({ isOpen, onClose }) => {
                 {/* <FormLabel>First Name</FormLabel> */}
                 <Input
                   onChange={handleChange}
-                  name="fullName"
+                  name="name"
                   type="text"
                   placeholder="Full name"
                   minLength={3}
+                  required
                 />
               </FormControl>
               <FormControl>
@@ -82,6 +100,7 @@ const FormModal = ({ isOpen, onClose }) => {
                   name="email"
                   type="email"
                   placeholder="Email"
+                  required
                 />
               </FormControl>
               <FormControl isInvalid={formErrors.confirmEmail}>
@@ -91,6 +110,7 @@ const FormModal = ({ isOpen, onClose }) => {
                   name="confirmEmail"
                   type="email"
                   placeholder="Confirm email"
+                  required
                 />
                 <FormErrorMessage>{formErrors.confirmEmail}</FormErrorMessage>
               </FormControl>
@@ -103,6 +123,11 @@ const FormModal = ({ isOpen, onClose }) => {
               Send
             </Button>
           </form>
+          {serverError && (
+            <Text color="tomato" textAlign="center" mt={2}>
+              {serverError}
+            </Text>
+          )}
         </ModalBody>
 
         <ModalFooter></ModalFooter>
