@@ -17,6 +17,10 @@ import { useState } from "react";
 
 const formErrorsSchema = { confirmEmail: null };
 
+export const isSameEmail = (email, confirmEmail) => {
+  return email === confirmEmail;
+};
+
 const FormModal = ({ isOpen, onClose, successCB }) => {
   const [fields, setFields] = useState({
     name: "",
@@ -36,10 +40,6 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
     let updatedFields = { ...fields };
     updatedFields[name] = value;
     setFields(updatedFields);
-  };
-
-  const isSameEmail = (email, confirmEmail) => {
-    return email === confirmEmail;
   };
 
   const handleSubmit = async (event) => {
