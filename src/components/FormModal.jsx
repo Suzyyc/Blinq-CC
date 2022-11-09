@@ -35,7 +35,6 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
-    console.log(event);
     const { name, value } = event.target;
     let updatedFields = { ...fields };
     updatedFields[name] = value;
@@ -47,7 +46,6 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
 
     setFormErrors(formErrorsSchema);
     if (isSameEmail(fields.email, fields.confirmEmail)) {
-      console.log(fields);
       setLoading(true);
       const res = await fetch(
         "https://us-central1-blinkapp-684c1.cloudfunctions.net/fakeAuth",
@@ -59,7 +57,6 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
       );
 
       if (res.ok) {
-        console.log("okay");
         onClose();
         successCB();
       } else {
@@ -101,6 +98,7 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
                   name="email"
                   type="email"
                   placeholder="Email"
+                  label="email"
                   required
                 />
               </FormControl>
@@ -111,6 +109,7 @@ const FormModal = ({ isOpen, onClose, successCB }) => {
                   name="confirmEmail"
                   type="email"
                   placeholder="Confirm email"
+                  label="confirmEmail"
                   required
                 />
                 <FormErrorMessage>{formErrors.confirmEmail}</FormErrorMessage>
